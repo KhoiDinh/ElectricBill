@@ -1,0 +1,73 @@
+// Inputs: kWh
+//Outputs: total, catch statement
+// Finds the total cost of bill based on rates and kWh and prints out statement if number isn't entered
+
+
+#include "stdafx.h"
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	//creates the variables
+		double total, regular_kWh, overRate, underRate,used, extra_kWh, morePay, lessPay, new_kWh;
+		int kWh;
+		
+	
+	// sets the variables to equal values	
+		overRate = 0.55; 
+		underRate = 0.27;
+		regular_kWh = 500.00;
+		 ;
+		
+		//try catch staement for special cases
+		try
+		{
+			
+			std:cout << "How much kWh have you consumed this month?: ";
+			std::cin >> kWh;
+			new_kWh = static_cast<double>(kWh);
+
+			if (std:: cin.fail())
+				throw new_kWh;
+			// if/else statements to determine which rate to use and when to use it
+			if (new_kWh > 500)
+			{
+
+				used= 500;
+				extra_kWh = new_kWh - used;
+
+			}
+			else
+			{
+				used = new_kWh;
+				extra_kWh = 0.0;
+
+			}
+			
+			
+		}
+		//message print out when not a number
+		catch (double i)
+		{
+			used = i;
+		cout << "You can't use the thing you put in. Only numerical values please."<< endl ;
+			return 0;
+		}
+		
+
+	//calculates total bill
+		lessPay = used * underRate;
+		morePay = extra_kWh * overRate;
+		total = lessPay + morePay;
+
+		// modifies output to get decimal form and prints out statement
+		cout << setiosflags(ios::fixed);
+		cout << setiosflags(ios::showpoint);
+		cout << "The total cost for kWh this month is: $" << setprecision(2) << total << endl;
+
+		
+	return 0;
+}
